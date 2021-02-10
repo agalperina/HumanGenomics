@@ -1,0 +1,203 @@
+---
+title: "Lab2_GalperinaAnastasia"
+author: "Anastasia Galperina"
+date: "2/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(DT)
+UMass_COVID_data <- read_csv("/Users/anastasia/Desktop/HumanGenome/HumanGenomics/data/UMass_COVID_Data.csv")
+```
+
+```{r}
+x <- c(1, 2, 3, 4)
+str(x)
+```
+
+```{r}
+a <- c("1", "2", "3", "4")
+str(a)
+```
+
+```{r}
+x <- c(1, 2, 3, 4)
+y <- c(2, 4, 6, 8)
+z <- c(x, y)
+str(z)
+```
+
+```{r}
+SNPs <- c("AA", "AA", "GG", "AG", "AG", "AA","AG", "AA", "AA", "AA", "AG")
+str(SNPs)
+```
+
+```{r}
+SNPs_cat <- as_factor(SNPs)
+str(SNPs_cat)
+```
+
+```{r}
+str(UMass_COVID_data)
+```
+
+```{r}
+#  want to work with genotype and chromosome as factors. We can specific these when importing the data
+mySNPs_cat25 <- read_tsv("/Users/anastasia/Desktop/HumanGenome/HumanGenomics/data/23andMe_cat25.txt", comment = '#',
+col_types = 
+  cols(
+    rsid = col_character(),
+    chromosome = col_factor(),
+    position = col_integer(),
+    genotype = col_factor()
+  ))
+```
+
+```{r}
+mySNPs_all <- read_tsv("/Users/anastasia/Desktop/HumanGenome/HumanGenomics/data/23andMe_complete.txt", comment = '#',
+col_types = 
+  cols(
+    rsid = col_character(),
+    chromosome = col_factor(),
+    position = col_integer(),
+    genotype = col_factor()
+  ))
+```
+
+```{r}
+# filter the UMass_COVID_data to cases greater than 30
+UMass_COVID_data %>% 
+  filter(cases > 30) 
+```
+
+```{r}
+# filter the UMass_COVID_data to cases greater than 30
+UMass_COVID_data %>% 
+  filter(collection_date >= '2021-02-01')
+```
+
+```{r}
+# filter the UMass_COVID_data to cases greater than 30
+UMass_COVID_data %>% 
+  filter(collection_date >= '2021-02-01') %>% 
+  filter(cases > 30) 
+```
+
+```{r}
+# total number of cases since reporting began
+UMass_COVID_data %>%
+  summarise(total_cases = sum(cases))
+```
+
+```{r}
+# new column with the number of cases detected per number of tests
+UMass_COVID_data %>%
+  mutate(detection = cases/tests)
+```
+
+```{r}
+# select subset of columns
+UMass_COVID_data %>%
+  select(collection_date, tests, cases)
+```
+
+```{r}
+# creates new data obj
+UMass_COVID_data_filter <- UMass_COVID_data %>% 
+  select(collection_date, tests, cases) %>% 
+  filter(collection_date >= '2021-02-01') %>% 
+  filter(cases > 30) %>% 
+  mutate(detection = cases/tests)
+
+UMass_COVID_data_filter
+```
+
+```{r}
+#  count the number of a factor in a category
+mySNPs_all %>% 
+  count(genotype)
+```
+
+```{r}
+# sort 
+mySNPs_all %>% 
+  arrange(-position)
+```
+
+```{r}
+# to group be a particular column for calculations
+mySNPs_all %>% 
+  group_by(chromosome, genotype) %>% 
+  count(genotype)
+```
+
+```{r}
+# making a table using knittr
+kable(UMass_COVID_data[1:10, ], caption = "COVID-19 testing conducted on the UMass community ")
+```
+
+```{r}
+datatable(UMass_COVID_data)
+```
+
+# Exercises
+
+#1
+```{r}
+mySNP_all_filter1 <- mySNPs_all %>%
+  select(position, genotype)
+
+mySNP_all_filter1
+```
+
+#2
+```{r}
+mySNP_all_filter2 <- mySNPs_all %>%
+  filter(chromosome == 'MT')  %>%
+  filter(genotype != 'A') %>%
+  filter(genotype != 'T')
+  
+mySNP_all_filter2
+```
+
+#3
+```{r}
+mySNP_all_filter3 <- mySNPs_all %>%
+  group_by(chromosome) %>%
+  summarise(min = min(position), max = max(position), total_positions = (max - min), total_SNP = n())
+  
+# I counted the total_SNP in exercise 3 that I can use mySNP_all_filter3 in exercise 4
+mySNP_all_filter3
+```
+
+#4
+```{r}
+mySNP_all_filter4 <- mySNP_all_filter3 %>%
+  group_by(chromosome) %>%
+  mutate(density = (total_SNP / (total_positions)))
+
+mySNP_all_filter4 
+```
+
+#5
+```{r}
+mySNP_all_filter5 <- mySNP_all_filter4 %>%
+  arrange(density)
+  
+mySNP_all_filter5 
+```
+
+#6
+```{r}
+datatable(mySNP_all_filter5)
+```
+
+
+
+
