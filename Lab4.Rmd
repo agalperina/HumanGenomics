@@ -1,0 +1,130 @@
+---
+title: "Lab4"
+author: "Anastasia Galperina"
+date: "3/1/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(DT)
+```
+
+```{r}
+report_03_11_2020 <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-11-2020.csv")) %>%
+  rename(Country_Region = "Country/Region", Province_State = "Province/State")
+```
+
+```{r}
+report_01_11_2021 <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/01-11-2021.csv"))
+```
+
+```{r}
+str(report_03_11_2020)
+```
+
+```{r}
+datatable(report_03_11_2020)
+```
+
+```{r}
+datatable(report_01_11_2021)
+```
+
+#Exercise 1
+
+1. The format of the daily reports has changed over time. What are new data types (e.g. columns) that are were collected on 1/11/2021 relative to 3/11/2020? Load the both files into R directly from GitHub (see example above). Note the in the more recent dates they have changed the column headers so that it is no longer necessary to rename Province_State and Country_Region (and will generate an error if applied). Use str() and View() (or in the top right corner click on Environment and then the data frame.).
+
+New column additions to January 2021 data include: active cases, combined key, incident rate and case fatality ratio.
+
+2. Determine the total Confirmed cases and Deaths for each of the above data for each country. Many countries have multiple entries representing different regions (e.g. counties and states). To get the counts for a country we need to summarise the data. Use group_by() and summarize() to make a data frame (tibble) with total counts for each country. Report as a DT table.
+
+```{r}
+summ_03_11_2020_report <- report_03_11_2020 %>% 
+    group_by(Country_Region) %>% 
+    summarize(total_deaths = sum(Deaths), total_confirmed = sum(Confirmed))
+
+datatable(summ_03_11_2020_report)
+```
+
+```{r}
+summ_01_11_2021_report <- report_01_11_2021 %>% 
+    group_by(Country_Region) %>% 
+    summarize(total_deaths = sum(Deaths), total_confirmed = sum(Confirmed))
+
+datatable(summ_01_11_2021_report)
+```
+3. To get counts for confirmed cases per U.S state use filter() to select US and group_by and summarize as above. Report as a DT table.
+
+```{r}
+counts_03_11_2020_report <- report_03_11_2020 %>% 
+    filter(Country_Region == "US") %>% 
+    group_by(Province_State) %>% 
+    summarize(total_cases = sum(Confirmed))
+
+datatable(counts_03_11_2020_report)
+```
+```{r}
+counts_01_11_2021_report <- report_01_11_2021 %>% 
+    filter(Country_Region == "US") %>% 
+    group_by(Province_State) %>% 
+    summarize(total_cases = sum(Confirmed))
+
+datatable(counts_01_11_2021_report)
+```
+
+4. It will be difficult to make simple graphs with the data from all countries in the world or even the US states. Use arrange and slice() to get just the top 10 countries for Deaths.
+
+```{r}
+ deaths_03_11_2020_report <- report_03_11_2020 %>% 
+    group_by(Country_Region) %>% 
+    summarize(total_deaths = sum(Deaths)) %>%
+    arrange(desc(total_deaths)) %>% 
+    slice_max(total_deaths, n=10)
+
+datatable(deaths_03_11_2020_report)
+```
+
+```{r}
+ deaths_01_11_2021_report <- report_01_11_2021 %>% 
+    group_by(Country_Region) %>% 
+    summarize(total_deaths = sum(Deaths)) %>%
+    arrange(desc(total_deaths)) %>% 
+    slice_max(total_deaths, n=10)
+
+datatable(deaths_01_11_2021_report)
+```
+
+5. Make plots using geom_point() of the top 10 countries with the deaths (two separate graphs) on 3/12/2020 and 1/12/2021. Include better x and y labels and a title.
+
+```{r}
+ggplot(data = deaths_03_11_2020_report, aes(x = Country_Region, y = total_deaths)) +
+  geom_point() +
+  ggtitle("Top 10 Countries COVID Deaths 3/11/20")
+```
+
+```{r}
+ggplot(data = deaths_01_11_2021_report, aes(x = Country_Region, y = total_deaths)) +
+  geom_point() +
+  ggtitle("Top 10 Countries COVID Deaths 1/11/21")
+```
+
+6. Above the countries are ordered alphabetically. Make new graphs using geom_bar with the countries order by # of deaths (Hint use y = reorder(Country_Region, Deaths)). To change the scale from scientific to numeric use scale_x_continuous(labels = scales::number).
+
+```{r}
+ggplot(data = deaths_03_11_2020_report, aes(x = total_deaths, y = reorder(Country_Region, total_deaths))) +
+  geom_point() +
+  scale_x_continuous(labels = scales::number) +
+  ggtitle("Top 10 Countries COVID Deaths 3/11/20") 
+```
+```{r}
+ggplot(data = deaths_01_11_2021_report, aes(x = total_deaths, y = reorder(Country_Region, total_deaths))) +
+  geom_point() +
+  scale_x_continuous(labels = scales::number) +
+  ggtitle("Top 10 Countries COVID Deaths 1/11/21") 
+```
+
