@@ -1,0 +1,148 @@
+---
+title: "Lab5pt2_GalperinaAnastasia"
+author: "Anastasia Galperina"
+date: "3/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(plotly)
+```
+
+# Setup
+```{r}
+SNPs <- read_tsv("data/23andMe_complete.txt", comment = '#',
+col_types = 
+  cols(
+    rsid = col_character(),
+    chromosome = col_factor(),
+    position = col_integer(),
+    genotype = col_factor()
+  ))
+```
+
+```{r, fig.width = 6, fig.height = 6}
+ggplot(data = SNPs) + 
+  geom_bar(mapping = aes(x = genotype)) + 
+  ggtitle("Total SNPs for each genotype") +
+  ylab("Total number of SNPs") +
+  xlab("Genotype")
+
+```
+
+```{r}
+pdf("images/SNP_example_plot.pdf", width=6, height=3)
+ggplot(data = SNPs) + 
+  geom_bar(mapping = aes(x = chromosome, fill = genotype))
+dev.off()
+```
+
+```{r}
+# Plot graph to a png outputfile
+ppi <- 300
+png("images/SNP_example_plot.png", width=6*ppi, height=6*ppi, res=ppi)
+ggplot(data = SNPs) + 
+  geom_bar(mapping = aes(x = chromosome, fill = genotype))
+dev.off()
+```
+
+![Genotype counts per chromosome](images/SNP_example_plot.png) 
+
+```{r}
+# Version 1 1
+p <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
+  geom_point()
+ggplotly(p)
+```
+
+```{r}
+# Version 2
+ggplotly(
+  ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
+    geom_point()
+ )
+```
+
+# Exercises 1
+```{r}
+ggplot(data = SNPs, aes(x=chromosome)) + 
+  geom_bar(fill="yellow", color="black") +
+  ggtitle("Total SNP Count foreach Chromosome") +
+  xlab("Chromosome") +
+  ylab("Count")
+```
+
+# Exercises 2
+```{r}
+ggplot(data = SNPs) + 
+  geom_bar(aes(x = chromosome, fill = genotype), color="black") +
+  ggtitle("Total SNP Count foreach Chromosome") +
+  xlab("Chromosome") +
+  ylab("Count") +
+  theme(legend.position="bottom")
+```
+
+# Exercises 3
+```{r}
+ggplotly(
+  ggplot(data = SNPs) + 
+  geom_bar(aes(x = chromosome, fill = genotype), color="black") +
+  labs(title = str_wrap("Total number of SNPs on each chromosome", 25)) +
+  xlab("Chromosome") +
+  ylab("Count")
+)
+```
+
+# Exercises 4
+```{r}
+ggplot(data = SNPs) + 
+  geom_bar(aes(x = chromosome, fill = genotype), color="black") +
+  ggtitle("Total SNP Count foreach Chromosome") +
+  xlab("Chromosome") +
+  ylab("Count") +
+  facet_wrap(facets = vars(genotype)) +
+  theme(legend.position="bottom") +
+  theme(text = element_text(size=10),
+        axis.text.x = element_text(size=4)) 
+```
+
+# Exercises 5
+```{r}
+ggplot(data = SNPs) + 
+  geom_bar(aes(x = chromosome, fill = genotype), color="black") +
+  ggtitle("Total SNP Count foreach Chromosome") +
+  xlab("Chromosome") +
+  ylab("Count") +
+  facet_wrap(facets = vars(genotype),scales="free_y") +
+  theme(text = element_text(size=10),
+        axis.text.x = element_text(size=4)) +
+  theme(legend.position="bottom")
+```
+
+# Exercises 6
+```{r}
+ggplot(data = SNPs) + 
+  geom_bar(aes(x = chromosome, fill = genotype), color="black") +
+  ggtitle("Total SNP Count foreach Chromosome") +
+  xlab("Chromosome") +
+  ylab("Count") +
+  theme(legend.position="bottom")
+```
+
+```{r}
+# Plot graph to a png outputfile
+ppi <- 300
+png("images/SNP.png", width=15*ppi, height=10*ppi, res=ppi)
+ggplot(data = SNPs) + 
+  geom_bar(mapping = aes(x = chromosome, fill = genotype)) + 
+  ggtitle("Total SNP Count foreach Chromosome Stacked") 
+dev.off()
+```
+
+# Exercises 7
+![Stacked genotype counts per chromosome](images/SNP.png) 
