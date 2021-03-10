@@ -1,0 +1,241 @@
+---
+title: "Lab6.Rmd"
+author: "Anastasia Galperina"
+date: "3/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(gganimate)
+library(transformr)
+library(magick)
+```
+
+```{r}
+time_series_confirmed <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
+  rename(Province_State = "Province/State", Country_Region = "Country/Region") 
+```
+
+```{r}
+download.file(url="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", 
+               destfile = "data/time_series_covid19_confirmed_global.csv")
+```
+
+```{r}
+time_series_confirmed <- read_csv("data/time_series_covid19_confirmed_global.csv")%>%
+  rename(Province_State = "Province/State", Country_Region = "Country/Region")
+```
+
+```{r}
+head(time_series_confirmed)
+```
+
+```{r}
+time_series_confirmed_long <- time_series_confirmed %>% 
+               pivot_longer(-c(Province_State, Country_Region, Lat, Long),
+                            names_to = "Date", values_to = "Confirmed") 
+```
+
+```{r}
+time_series_confirmed_long$Date <- mdy(time_series_confirmed_long$Date)
+```
+
+```{r}
+head(time_series_confirmed_long)
+```
+
+```{r}
+time_series_confirmed_long%>% 
+  group_by(Country_Region, Date) %>% 
+  summarise(Confirmed = sum(Confirmed)) %>% 
+  filter (Country_Region == "US") %>% 
+    ggplot(aes(x = Date,  y = Confirmed)) + 
+    geom_point() +
+    geom_line() +
+    ggtitle("US COVID-19 Confirmed Cases")
+```
+
+```{r}
+time_series_confirmed_long %>% 
+    group_by(Country_Region, Date) %>% 
+    summarise(Confirmed = sum(Confirmed)) %>% 
+    filter (Country_Region %in% c("China","France","Italy", 
+                                "Korea, South", "US")) %>% 
+    ggplot(aes(x = Date,  y = Confirmed, color = Country_Region)) + 
+    geom_point() +
+    geom_line() +
+    ggtitle("COVID-19 Confirmed Cases")
+```
+
+```{r}
+time_series_confirmed_long_daily <-time_series_confirmed_long %>% 
+    group_by(Country_Region, Date) %>% 
+    summarise(Confirmed = sum(Confirmed)) %>% 
+    mutate(Daily = Confirmed - lag(Confirmed, default = first(Confirmed )))
+```
+
+```{r}
+time_series_confirmed_long_daily %>% 
+    filter (Country_Region == "US") %>% 
+    ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
+    geom_point() +
+    ggtitle("COVID-19 Confirmed Cases")
+```
+
+```{r}
+time_series_confirmed_long_daily %>% 
+    filter (Country_Region == "US") %>% 
+    ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
+    geom_line() +
+    ggtitle("COVID-19 Confirmed Cases")
+```
+
+```{r}
+time_series_confirmed_long_daily %>% 
+    filter (Country_Region == "US") %>% 
+    ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
+    geom_smooth() +
+    ggtitle("COVID-19 Confirmed Cases")
+```
+
+```{r}
+time_series_confirmed_long_daily %>% 
+    filter (Country_Region == "US") %>% 
+    ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
+    geom_smooth(method = "gam", se = FALSE) +
+    ggtitle("COVID-19 Confirmed Cases")
+```
+
+```{r} 
+# set eval false to save time on knits
+theme_set(theme_bw())
+daily_counts <- time_series_confirmed_long_daily %>% 
+    filter (Country_Region == "US")
+p <- ggplot(daily_counts, aes(x = Date,  y = Daily, color = Country_Region)) + 
+      geom_point() +
+      ggtitle("Confirmed COVID-19 Cases") +
+      geom_point(aes(group = seq_along(Date))) +
+      transition_reveal(Date) 
+# Some people using a local installation of RStudio may needed to use this line instead
+animate(p, renderer = magick_renderer(), end_pause = 15)
+```
+
+```{r, eval = FALSE}
+anim_save("daily_counts_US.gif", p)
+```
+
+# Exercises
+
+#1
+```{r}
+time_series_confirmed_long %>% 
+    group_by(Country_Region, Date) %>% 
+    summarise(Confirmed = sum(Confirmed)) %>% 
+    filter (Country_Region %in% c("Brazil","India","Germany", 
+                                "Russia", "US")) %>%
+    ggplot(aes(x = Date,  y = Confirmed, color = Country_Region)) + 
+    facet_wrap(facets = vars(Country_Region), scales="free_y") +
+    geom_point() +
+    geom_line() +
+    ggtitle("COVID-19 Confirmed Cases")
+```
+
+#2
+```{r}
+time_series_confirmed_long %>% 
+    group_by(Country_Region, Date) %>% 
+    summarise(Confirmed = sum(Confirmed)) %>% 
+    filter (Country_Region %in% c("Brazil","India","Germany", 
+                                "Russia", "US")) %>%
+    ggplot(aes(x = Date,  y = Confirmed, color = Country_Region)) + 
+    geom_point() +
+    geom_line() +
+    ggtitle("COVID-19 Confirmed Cases")
+```
+
+#3
+```{r}
+download.file(url="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv", 
+               destfile = "data/time_series_covid19_deaths_global.csv")
+```
+
+```{r}
+time_series_deaths <- read_csv("data/time_series_covid19_deaths_global.csv")%>%
+  rename(Province_State = "Province/State", Country_Region = "Country/Region")
+```
+
+```{r}
+time_series_deaths_long <- time_series_deaths %>% 
+               pivot_longer(-c(Province_State, Country_Region, Lat, Long),
+                            names_to = "Date", values_to = "Deaths") 
+```
+
+```{r}
+time_series_deaths_long$Date <- mdy(time_series_deaths_long$Date)
+```
+
+```{r}
+time_series_deaths_long %>% 
+    group_by(Country_Region, Date) %>% 
+    summarise(Deaths = sum(Deaths)) %>% 
+    filter (Country_Region %in% c("Mexico","Canada", "US")) %>% 
+    ggplot(aes(x = Date,  y = Deaths, color = Country_Region)) + 
+    geom_line() +
+    geom_point() +
+    ggtitle("COVID-19 Deaths")
+
+#head(time_series_deaths_long)
+```
+
+#4
+```{r}
+time_series_deaths_long_daily <- time_series_deaths_long %>% 
+    group_by(Country_Region, Date) %>% 
+    summarise(Deaths = sum(Deaths)) %>% 
+    mutate(Daily = Deaths - lag(Deaths, default = first(Deaths)))
+```
+```{r}
+ex4_graph <- time_series_deaths_long_daily %>% 
+    filter (Country_Region %in% c("Mexico","Canada", "US")) %>% 
+    ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
+    ggtitle("COVID-19 Confirmed Cases") +
+    geom_smooth(method = "gam", se = FALSE) 
+
+ex4_graph
+```
+
+
+#5
+```{r}
+ex5_graph <- time_series_deaths_long_daily %>% 
+    filter (Country_Region %in% c("Brazil","India","Germany", 
+                                "Russia", "US")) %>%
+    ggplot(aes(x = Date,  y = Daily, color = Country_Region)) + 
+    geom_smooth(method = "gam", se = FALSE) 
+    ggtitle("COVID-19 Confirmed Cases")
+
+ex5_graph
+```
+
+#6
+```{r}
+daily_counts <- time_series_deaths_long_daily %>% 
+    filter (Country_Region %in% c("Brazil","India","Germany", 
+                                "Russia", "US"))
+ex6_graph <- ggplot(daily_counts, aes(x = Date,  y = Daily, color = Country_Region)) + 
+      geom_line() +
+      ggtitle("Deaths by COVID-19") +
+      geom_line(aes(group = seq_along(Date))) +
+      transition_reveal(Date)
+
+ex6_graph
+```
+
+
+
