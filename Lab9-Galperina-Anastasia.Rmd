@@ -1,0 +1,202 @@
+---
+title: "Lab9Galperina-Anastasia.Rmd"
+author: "Anastasia Galperina"
+date: "4/7/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(DT)
+library(gwascat)
+```
+
+```{r}
+# Load Files 
+#mySNPs <- read_tsv("data/genome_A_G_v5_Full_20210322120133.txt", comment = '#',
+mySNPs <- read_tsv("data/23andMe_complete.txt", comment = '#',
+col_types = 
+  cols(
+    rsid = col_character(),
+    chromosome = col_factor(),
+    position = col_integer(),
+    genotype = col_factor()
+  ))
+```
+
+```{r}
+head(mySNPs)
+```
+
+```{r}
+filter(mySNPs, rsid == "rs174537")
+```
+
+```{r}
+updated_gwas_data <- as.data.frame(makeCurrentGwascat())
+```
+
+```{r}
+max(updated_gwas_data$DATE.ADDED.TO.CATALOG)
+```
+
+```{r}
+last_update <- max(updated_gwas_data$DATE.ADDED.TO.CATALOG)
+
+filter(updated_gwas_data, DATE.ADDED.TO.CATALOG == last_update) %>% select(STUDY) %>% distinct()
+```
+
+```{r}
+filter(updated_gwas_data, DATE.ADDED.TO.CATALOG == last_update) %>% select(LINK) %>% distinct()
+```
+
+```{r}
+mySNPs_gwas_table <- inner_join(mySNPs, updated_gwas_data, by = c("rsid" = "SNPS"))
+```
+
+```{r}
+mySNPs_gwas_table$risk_allele_clean <- str_sub(mySNPs_gwas_table$STRONGEST.SNP.RISK.ALLELE, -1)
+mySNPs_gwas_table$my_allele_1 <- str_sub(mySNPs_gwas_table$genotype, 1, 1)
+mySNPs_gwas_table$my_allele_2 <- str_sub(mySNPs_gwas_table$genotype, 2, 2)
+mySNPs_gwas_table$have_risk_allele_count <- if_else(mySNPs_gwas_table$my_allele_1 == mySNPs_gwas_table$risk_allele_clean, 1, 0) + if_else(mySNPs_gwas_table$my_allele_2 == mySNPs_gwas_table$risk_allele_clean, 1, 0)
+```
+
+```{r}
+select(mySNPs_gwas_table, rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "omega") | str_detect(tolower(DISEASE.TRAIT), "fatty acid")) %>%
+ distinct()
+```
+
+```{r}
+select(mySNPs_gwas_table, rsid, DISEASE.TRAIT, STUDY) %>% 
+ filter(!str_detect(tolower(DISEASE.TRAIT), "omega") & !str_detect(tolower(DISEASE.TRAIT), "fatty acid")) %>%
+ distinct() %>%
+ filter(rsid == "rs174537")
+```
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, your_genotype = genotype, strongest_risk_allele = risk_allele_clean, DISEASE.TRAIT, STUDY) 
+```
+
+```{r}
+datatable(
+ filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, your_genotype = genotype, strongest_risk_allele = risk_allele_clean, DISEASE.TRAIT, STUDY )
+)
+```
+
+```{r}
+datatable(
+ filter(mySNPs_gwas_table,have_risk_allele_count > 0 & (str_detect(tolower(INITIAL.SAMPLE.SIZE), "european") | str_detect(tolower(REPLICATION.SAMPLE.SIZE), "european")) & (RISK.ALLELE.FREQUENCY > 0 & !is.na(RISK.ALLELE.FREQUENCY))) %>%
+ arrange(RISK.ALLELE.FREQUENCY) %>%
+ select(rsid, your_genotype = genotype, DISEASE.TRAIT, INITIAL.SAMPLE.SIZE,RISK.ALLELE.FREQUENCY)
+ )
+```
+
+```{r}
+trait_entry_count <- group_by(mySNPs_gwas_table, DISEASE.TRAIT) %>%
+ filter(have_risk_allele_count >= 1) %>%
+ summarise(count_of_entries = n())
+
+ggplot(filter(trait_entry_count, count_of_entries > 100), aes(x = reorder(DISEASE.TRAIT, count_of_entries, sum), y = count_of_entries)) +
+ geom_col() +
+ coord_flip() +
+ theme_bw() +
+ labs(title = "Which traits do you have the risk allele for\nthat have over 100 entries in the GWAS database?", y = "Count of entries", x = "Trait")
+```
+
+```{r}
+# Summarise proportion of SNPs for a given trait where you have a risk allele
+trait_snp_proportion <-  filter(mySNPs_gwas_table, risk_allele_clean %in% c("C" ,"A", "G", "T") & my_allele_1 %in% c("C" ,"A", "G", "T") & my_allele_2 %in% c("C" ,"A", "G", "T") ) %>%
+mutate(you_have_risk_allele = if_else(have_risk_allele_count >= 1, 1, 0)) %>%
+ group_by(DISEASE.TRAIT, you_have_risk_allele) %>%
+ summarise(count_of_snps = n_distinct(rsid)) %>%
+ mutate(total_snps_for_trait = sum(count_of_snps), proportion_of_snps_for_trait = count_of_snps / sum(count_of_snps) * 100) %>%
+ filter(you_have_risk_allele == 1) %>%
+ arrange(desc(proportion_of_snps_for_trait)) %>%
+ ungroup()
+```
+
+```{r}
+# Count the studies per trait in the database
+
+trait_study_count <- filter(mySNPs_gwas_table, risk_allele_clean %in% c("C" ,"A", "G", "T") & my_allele_1 %in% c("C" ,"A", "G", "T") & my_allele_2 %in% c("C" ,"A", "G", "T") ) %>%
+ group_by(DISEASE.TRAIT) %>%
+ summarise(count_of_studies = n_distinct(PUBMEDID), mean_risk_allele_freq = mean(RISK.ALLELE.FREQUENCY))
+
+# Merge the above together
+
+trait_snp_proportion <- inner_join(trait_snp_proportion, trait_study_count, by = "DISEASE.TRAIT")
+
+# Plot the traits where there were more than 2 studies and you have risk alleles for more than 70% of the SNPs studied
+
+ggplot(filter(trait_snp_proportion, count_of_studies > 1 & proportion_of_snps_for_trait > 70), aes(x = reorder(DISEASE.TRAIT, proportion_of_snps_for_trait, sum), y = proportion_of_snps_for_trait, fill = mean_risk_allele_freq)) +
+ geom_col() +
+ coord_flip() +
+ theme_bw() + 
+ labs(title = "Traits I have more than half of the risk\nalleles studied where > 1 studies involved", 
+ y = "% of SNPs with risk allele", x = "Trait", fill = "Mean risk allele frequency") 
+```
+
+# Exercises
+
+#1
+```{r}
+str_sub(mySNPs_gwas_table$RISK.ALLELE.FREQUENCY)
+```
+It means that the allele is associated with that phenotype.
+
+#2
+```{r}
+select(mySNPs_gwas_table, rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "diabetes")) %>%
+ distinct()
+```
+
+#3
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "diabetes")) %>%
+ distinct()
+```
+
+#4
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "asthma")) %>%
+ distinct()
+```
+
+#5
+```{r}
+datatable(trait_snp_proportion)
+```
+
+#6
+```{r}
+trait_study_count <- filter(mySNPs_gwas_table, risk_allele_clean %in% c("C" ,"A", "G", "T") & my_allele_1 %in% c("C" ,"A", "G", "T") & my_allele_2 %in% c("C" ,"A", "G", "T") ) %>%
+ group_by(DISEASE.TRAIT) %>%
+ summarise(count_of_studies = n_distinct(PUBMEDID), mean_risk_allele_freq = mean(RISK.ALLELE.FREQUENCY))
+
+ex6 <- trait_study_count %>%
+  filter(mean_risk_allele_freq < 0.15)
+
+ggplot(ex6, aes(x = DISEASE.TRAIT, y = mean_risk_allele_freq))+
+ geom_col() +
+ coord_flip() +
+ theme_bw() + 
+ labs(title = "traits with a risk allele frequency below 0.15 ", y = "% of SNPs with risk allele", x = "Trait", fill = "Mean risk allele frequency") 
+```
+
+
+
+
+
+
