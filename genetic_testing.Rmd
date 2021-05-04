@@ -1,0 +1,479 @@
+---
+title: "Genetic Testing"
+author: "Anastasia Galperina"
+date: "4/28/2021"
+output: html_document
+---
+# 1. Introduction to genetic testing and the underlying technology
+
+Personal genetic testing is transforming the biological and medical fields as humans now have access to their genetic instructions. However, every positive such as personalized medicine, assistance in criminal investigations and increase in research are all accompanied by a negative foil. Personalized medicine is a privilege that seems to be given to those in higher socioeconomic classes, criminal investigations are riddled with privacy and consent obstacles, while research has taken advantage of minorities or has greatly catered to those with a European ancestry. There is also high concern of privacy and having such personal data being leaked and placed in the wrong hands.
+
+DNA polymorphisms, most common which are SNPs, can be detected in genomes in various ways. In past decades, methods such as Southern blots, PCRs and hybridization techniques using microarray chips have been used for genome sequencing. Recently, DNA-based molecular markers have been a breakthrough technology that is used to detect SNPs as these markers can easily identify particular DNA sequences. 
+
+# 2. My genealogy and family history
+
+I was very lucky and had very documented information about my family history on my paternal side, almost no questions were left unanswered. Our documents included birth locations and dates, death locations and deaths, occupation, relocations, any achievements or major life events. My mother’s side, however, is a complete mystery beyond just immediate family. 
+
+![Geneology Tree](images/geneology_circle_chart.png)
+![Family Tree](images/HumanGenomeTree_rel_graph.pdf)
+
+# 3. DNA matches and relatives in the databases
+
+I would expect to share around 50% of my DNA with my parents, 25% with each of my grandparents and 12.5% with each great grandparent and so on. However, it is important to distinguish the difference between genealogical ancestors and genetic ancestors as the later are the ones that I actually got some DNA from. This, of course, is regarding autosomal DNA as the sex chromosomes and maternal DNA are more directly passed down. After about eight generations back is when it is expected that the number of genetic ancestors increases linearly rather than exponentially, while the number of genealogical ancestors only begins to increase exponentially. So starting around the eight generation is where I would begin having ancestors with which I have no genetic similarity. 
+
+![DNA Relatives](images/DNA-relatives.png)
+I have around the expected amount of DNA shared with my aunt (25 % expected and 23.34 % observed) as well as with my first cousin once removed (6.25 % expected and 5.17 % observed). I share 2.5 % and 2.11 % with two of my second cousins and it is expected I share 3.13 %. I share 1.78 %, 1.58 % and 1.14 % with three of my third cousins and it is expected I share 0.78 %. 
+
+# 4. Ethnicity estimates
+
+My ethnicity results were exactly what I predicted. I already knew from my paternal side that I am 50 % Ashkenazi Jewish as my paternal side of the family is 100% Ashkenazi Jewish. My maternal side of the family could potentially have had some surprises, but I got results that I expected. My 47 % Eastern European is all from my mother who believes that her family is Don Cossack, and I even expected the 2 % East Asian and Native American results as Russian history, and thus genealogy, was heavily influenced by the Mongol Empire that ruled over Russia in the 13th and 14th centuries. The German and French influence is most likely from my paternal side as throughout Jewish migration through Europe, many originally stayed in Germany. There was also 0.2 % Central Asian (Kazakhstan, Uzbekistan, Turkmenistan, etc.) trace DNA as well as 0.2 % North African and West Asian DNA. The Central Asian DNA either also came from Mongol rule over Russia, or a potential modern explanation could be that due the USSR which included the Central Asian region. I am not sure where the 0.4 % trace North African DNA comes in. I could further test my theories by looking at DNA similarities between me and some of the people 23andMe listed as possible relatives, which I did. By looking at my Aunt from my paternal side I could confirm that my Central Asian DNA mostly likely came from my Mother as my Aunt had no Central Asian DNA. She did, however, have 1 % North African and West Asian DNA which means that that those results are most likely from my Jewish Ancestors.
+
+![Ethnicity Percent](images/ethnicity-percentage.png)
+![Ethnicity Map](images/ethnicity-map.png)
+
+# 5. Older family history based on mitochondrial and Y chromosomes results
+
+The maternal and paternal haplogroups offer approximated ancestry information from ten to hundred thousand years ago. This is because both mitochondrial DNA and Y chromosome DNA have a slower mutation rate and therefore are generally conserved. Therefore, any mutations are significant and can be traced back to hundreds of generations.
+Through family members that have also taken a 23andMe test I was able to gather more information about my mitochondrial and Y chromosome results.
+ 
+Mother:
+Mitochondrial:  H1u 
+Y chromosome: ?
+
+Father:
+Mitochondrial: W3
+Y chromosome: E-L29
+ 
+My mitochondrial haplogroup is H1u, while if I had a Y chromosome, my haplogroup would be E-L29. After further research, I discovered that it is proposed that the H1u lineage split off from other H groups around modern-day Azerbaijan, general Caucus area. This lines up with my Mother’s Don Cossacks ancestry as Don Cossacks are believed to have originated in the North Caucuses. The most common maternal haplogroup for Ashkenazi Jews is K, so it is interesting that my paternal maternal haplogroup is W which is most common in Pakistan and Northern Indian. I found some research that believes that W3 originated in the Middle East but spread to Europe around 15,000 years ago and spans across regions of Russia, to North Africa, Caucasus, the Near East, Mongolia and the Indian Subcontinent. E-L29 also originated in the Middle East about 4,000 years ago and is extremely common in Ashkenazi Jews.
+
+# 6. Medically important genotypes and 7. Interesting genotypes
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(DT)
+library(gwascat)
+```
+
+```{r}
+# Load Files 
+mySNPs <- read_tsv("data/genome_A_G_v5_Full_20210322120133.txt", comment = '#',
+col_types = 
+  cols(
+    rsid = col_character(),
+    chromosome = col_factor(),
+    position = col_integer(),
+    genotype = col_factor()
+  ))
+```
+
+```{r}
+updated_gwas_data <- as.data.frame(makeCurrentGwascat())
+```
+
+```{r}
+max(updated_gwas_data$DATE.ADDED.TO.CATALOG)
+```
+
+```{r}
+last_update <- max(updated_gwas_data$DATE.ADDED.TO.CATALOG)
+
+filter(updated_gwas_data, DATE.ADDED.TO.CATALOG == last_update) %>% select(STUDY) %>% distinct()
+```
+
+```{r}
+filter(updated_gwas_data, DATE.ADDED.TO.CATALOG == last_update) %>% select(LINK) %>% distinct()
+```
+
+```{r}
+mySNPs_gwas_table <- inner_join(mySNPs, updated_gwas_data, by = c("rsid" = "SNPS"))
+```
+
+```{r}
+mySNPs_gwas_table$risk_allele_clean <- str_sub(mySNPs_gwas_table$STRONGEST.SNP.RISK.ALLELE, -1)
+mySNPs_gwas_table$my_allele_1 <- str_sub(mySNPs_gwas_table$genotype, 1, 1)
+mySNPs_gwas_table$my_allele_2 <- str_sub(mySNPs_gwas_table$genotype, 2, 2)
+mySNPs_gwas_table$have_risk_allele_count <- if_else(mySNPs_gwas_table$my_allele_1 == mySNPs_gwas_table$risk_allele_clean, 1, 0) + if_else(mySNPs_gwas_table$my_allele_2 == mySNPs_gwas_table$risk_allele_clean, 1, 0)
+```
+
+There are three medical concerns that I wanted to investigate with my SNPs. Asthma, type-2 diabetes and Crohns/ associated IBD or IBS SNPS
+
+I have a family history of type-2 diabetes. I wanted to look more into it to see what SNPs I have asscoaited with diabetes risk.
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "diabetes")) %>%
+ distinct()
+```
+
+```{r}
+filter(mySNPs, rsid == "rs12255372")
+```
+No linked to type-2 diabetes and breast cancer
+```{r}
+filter(mySNPs, rsid == "rs4402960")
+```
+No linked to type-2 diabetes
+```{r}
+filter(mySNPs, rsid == "rs7754840")
+```
+No linked to type-2 diabetes
+
+```{r}
+filter(mySNPs, rsid == "rs12255372")
+```
+no increased risk of T2D
+
+Carrying two copies of a common variant of TCF7L2 doubles your chances of developing diabetes and puts you in a similar risk category to being clinically obese
+```{r}
+filter(mySNPs, rsid == "rs7903146")
+```
+Normal (lower) risk of Type 2 Diabetes and Gestational Diabetes.
+```{r}
+filter(mySNPs, rsid == "rs12255372")
+```
+no increased risk of T2D
+
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "celiac")) %>%
+ distinct()
+```
+one of two SNPs associated with increase Crohn's
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "colorectal")) %>%
+ distinct()
+```
+
+```{r}
+filter(mySNPs, rsid == "rs16892766")
+```
+```{r}
+filter(mySNPs, rsid == "rs4779584")
+```
+```{r}
+filter(mySNPs, rsid == "rs58920878")
+```
+no increase of cholorectal cancer
+
+```{r}
+filter(mySNPs, rsid == "rs4939827")
+```
+0.73x decreased risk for colorectal cancer
+
+I have been "diagnosed" with asthma, but I have never experienced an asthma attack or have experienced troubled breathing. Therefore, I wanted to see if I have any SNPs associated with asthma.
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "asthma")) %>%
+ distinct()
+```
+
+```{r}
+filter(mySNPs, rsid == "rs1695")
+```
+normal asthma risk in certain populations
+```{r}
+filter(mySNPs, rsid == "rs2303067")
+```
+No asthma and atopic dermatitis SNP
+```{r}
+filter(mySNPs, rsid == "rs4794067")
+```
+2.1x risk for Aspirin Induced Asthma. But possibly lower risk of lupus and intractable Graves' disease.
+
+The following SNPs are all associated with increased asthma risk if exposed to smoke
+
+```{r}
+filter(mySNPs, rsid == "rs2305480")
+```
+~3x increased asthma risk if exposed to smoke
+```{r}
+filter(mySNPs, rsid == "rs4795400")
+```
+no SNP present
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "memory")) %>%
+ distinct()
+```
+
+```{r}
+filter(mySNPs, rsid == "rs4680")
+```
+Warrior: Val, less exploratory, higher COMT enzymatic activity, therefore lower dopamine levels; higher pain threshold, better stress resiliency, albeit with a modest reduction in executive cognition performance under most conditions
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "nicotine")) %>%
+ distinct()
+```
+
+```{r}
+filter(mySNPs, rsid == "rs3750344 ")
+```
+```{r}
+filter(mySNPs, rsid == "rs1051730 ")
+```
+No nicotine dependence alleles
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "drug")) %>%
+ distinct()
+```
+
+Ashkenazi related alleles
+```{r}
+filter(mySNPs, rsid == "rs11209026")
+```
+higher risk for certain autoimmune diseases.
+```{r}
+filter(mySNPs, rsid == "rs11209026")
+```
+higher risk for certain autoimmune diseases.
+```{r}
+filter(mySNPs, rsid == "rs386833395")
+```
+```{r}
+filter(mySNPs, rsid == "rs80357906")
+```
+no BRCA1 variants
+```{r}
+filter(mySNPs, rsid == "rs80359550")
+```
+no BRCA2 variant 
+
+not a carrier for cystic fibrosis
+```{r}
+filter(mySNPs, rsid == "rs121965064")
+```
+```{r}
+filter(mySNPs, rsid == "rs373297713")
+```
+```{r}
+filter(mySNPs, rsid == "rs121965063")
+```
+not a carrier of hemophilia C (1/23 Ashkenazi are carriers
+
+```{r}
+filter(mySNPs, rsid == "rs111033171")
+```
+```{r}
+filter(mySNPs, rsid == "rs137853022")
+```
+```{r}
+filter(mySNPs, rsid == "rs28939712")
+```
+not a Familial dysautonomia carrier
+
+Checking for random SNPs
+```{r}
+filter(mySNPs, rsid == "rs333")
+```
+No resistance to HIV
+```{r}
+filter(mySNPs, rsid == "rs662799")
+```
+1.4x higher early heart attack risk; less weight gain on high fat diets
+```{r}
+filter(mySNPs, rsid == "rs7495174")
+```
+blue/gray eyes more likely
+```{r}
+filter(mySNPs, rsid == "rs12913832")
+```
+blue eye color, 99% of the time
+```{r}
+filter(mySNPs, rsid == "rs1799971")
+```
+No stronger alcohol cravings 
+```{r}
+filter(mySNPs, rsid == "rs4988235")
+```
+Can digest lactose
+```{r}
+filter(mySNPs, rsid == "rs590787")
+```
+Rh +. I knew I was type A, now I know Im A+
+```{r}
+filter(mySNPs, rsid == "rs4675690")
+```
+show less disgust
+```{r}
+filter(mySNPs, rsid == "rs1015362")
+```
+2-4x higher risk of sun sensitivity if part of risk haplotype.
+```{r}
+filter(mySNPs, rsid == "rs4911414")
+```
+2-4x higher risk of sun sensitivity if part of risk haplotype
+```{r}
+filter(mySNPs, rsid == "rs12821256")
+```
+no additional likelyhood of blonde hair
+```{r}
+filter(mySNPs, rsid == "rs12203592")
+```
+likely presence of freckles, brown hair and high sensitivity of skin to sun exposure.
+```{r}
+filter(mySNPs, rsid == "rs35264875")
+```
+one blonde variant
+```{r}
+filter(mySNPs, rsid == "rs12896399")
+```
+Lighter hair color & blue eyes more likely
+```{r}
+filter(mySNPs, rsid == "rs1042522")
+```
+Live 3 years longer. Chemotherapy is more effective.
+```{r}
+filter(mySNPs, rsid == "rs6968865")
+```
+Associated with (slightly) increased coffee consumption
+
+
+Drug Metabolism
+```{r}
+filter(mySNPs, rsid == "rs4986893")
+```
+```{r}
+filter(mySNPs, rsid == "rs28399504")
+```
+```{r}
+filter(mySNPs, rsid == "rs41291556")
+```
+normal metabolizer of several commonly prescribed drugs
+
+```{r}
+filter(mySNPs, rsid == "rs12248560")
+```
+ultra fast metabolizer of proton pump inhibitors and benefit from tamoxifen treatment; drug metabolism effects; also 0.77x decreased breast cancer risk
+```{r}
+filter(mySNPs, rsid == "rs8099917")
+```
+Moderately lower odds of responding to PEG-IFNalpha/RBV treatment (Hepatitis C treatments)
+```{r}
+filter(mySNPs, rsid == "rs1057910")
+```
+average 40% reduction in warfarin metabolism (1/2 SNPs)
+```{r}
+filter(mySNPs, rsid == "rs1800460")
+```
+impaired capability of detoxifying byproducts of certain drugs (antineoplastic and immunosuppressant)
+```{r}
+filter(mySNPs, rsid == "rs1800462")
+```
+incapable of detoxifying certain drugs (antineoplastic and immunosuppressant)
+```{r}
+filter(mySNPs, rsid == "rs1142345")
+```
+impaired drug metabolism (antineoplastic and immunosuppressant)
+```{r}
+filter(mySNPs, rsid == "rs11212617")
+```
+Somewhat increased likelihood of treatment success with metformin (helps with diabetes which I have increase chance of)
+```{r}
+filter(mySNPs, rsid == "rs2395029")
+```
+no increase risk for drug-induced liver injury when prescribed flucloxacillin
+
+
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, your_genotype = genotype, strongest_risk_allele = risk_allele_clean, DISEASE.TRAIT, STUDY) 
+```
+
+```{r}
+datatable(
+ filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, your_genotype = genotype, strongest_risk_allele = risk_allele_clean, DISEASE.TRAIT, STUDY )
+)
+```
+
+```{r}
+datatable(
+ filter(mySNPs_gwas_table,have_risk_allele_count > 0 & (str_detect(tolower(INITIAL.SAMPLE.SIZE), "european") | str_detect(tolower(REPLICATION.SAMPLE.SIZE), "european")) & (RISK.ALLELE.FREQUENCY > 0 & !is.na(RISK.ALLELE.FREQUENCY))) %>%
+ arrange(RISK.ALLELE.FREQUENCY) %>%
+ select(rsid, your_genotype = genotype, DISEASE.TRAIT, INITIAL.SAMPLE.SIZE,RISK.ALLELE.FREQUENCY)
+ )
+```
+
+```{r}
+trait_entry_count <- group_by(mySNPs_gwas_table, DISEASE.TRAIT) %>%
+ filter(have_risk_allele_count >= 1) %>%
+ summarise(count_of_entries = n())
+
+ggplot(filter(trait_entry_count, count_of_entries > 100), aes(x = reorder(DISEASE.TRAIT, count_of_entries, sum), y = count_of_entries)) +
+ geom_col() +
+ coord_flip() +
+ theme_bw() +
+ labs(title = "Which traits I have the risk allele for\nthat have over 100 entries in the GWAS database?", y = "Count of entries", x = "Trait")
+```
+
+```{r}
+# Summarise proportion of SNPs for a given trait where you have a risk allele
+trait_snp_proportion <-  filter(mySNPs_gwas_table, risk_allele_clean %in% c("C" ,"A", "G", "T") & my_allele_1 %in% c("C" ,"A", "G", "T") & my_allele_2 %in% c("C" ,"A", "G", "T") ) %>%
+mutate(you_have_risk_allele = if_else(have_risk_allele_count >= 1, 1, 0)) %>%
+ group_by(DISEASE.TRAIT, you_have_risk_allele) %>%
+ summarise(count_of_snps = n_distinct(rsid)) %>%
+ mutate(total_snps_for_trait = sum(count_of_snps), proportion_of_snps_for_trait = count_of_snps / sum(count_of_snps) * 100) %>%
+ filter(you_have_risk_allele == 1) %>%
+ arrange(desc(proportion_of_snps_for_trait)) %>%
+ ungroup()
+```
+
+```{r}
+trait_study_count <- filter(mySNPs_gwas_table, risk_allele_clean %in% c("C" ,"A", "G", "T") & my_allele_1 %in% c("C" ,"A", "G", "T") & my_allele_2 %in% c("C" ,"A", "G", "T") ) %>%
+ group_by(DISEASE.TRAIT) %>%
+ summarise(count_of_studies = n_distinct(PUBMEDID), mean_risk_allele_freq = mean(RISK.ALLELE.FREQUENCY))
+
+
+trait_snp_proportion <- inner_join(trait_snp_proportion, trait_study_count, by = "DISEASE.TRAIT")
+
+ggplot(filter(trait_snp_proportion, count_of_studies > 1 & proportion_of_snps_for_trait > 70), aes(x = reorder(DISEASE.TRAIT, proportion_of_snps_for_trait, sum), y = proportion_of_snps_for_trait, fill = mean_risk_allele_freq)) +
+ geom_col() +
+ coord_flip() +
+ theme_bw() + 
+ labs(title = "Traits I have more than half of the risk\nalleles studied where > 1 studies involved", 
+ y = "% of SNPs with risk allele", x = "Trait", fill = "Mean risk allele frequency") 
+```
+
+```{r}
+datatable(trait_snp_proportion)
+```
+
+```{r}
+datatable(
+ filter(mySNPs_gwas_table,have_risk_allele_count > 0 & (str_detect(tolower(INITIAL.SAMPLE.SIZE), "european") | str_detect(tolower(REPLICATION.SAMPLE.SIZE), "european")) & (RISK.ALLELE.FREQUENCY > 0. & !is.na(RISK.ALLELE.FREQUENCY))) %>%
+ arrange(RISK.ALLELE.FREQUENCY) %>%
+ select(rsid, your_genotype = genotype, DISEASE.TRAIT, INITIAL.SAMPLE.SIZE,RISK.ALLELE.FREQUENCY)
+ )
+```
+
+```{r}
+datatable(
+ filter(mySNPs_gwas_table, have_risk_allele_count == 2) %>%
+ select(rsid, your_genotype = genotype, strongest_risk_allele = risk_allele_clean, DISEASE.TRAIT, STUDY )
+)
+```
+
+# 8. Recommendations for next steps
+
+I should probably see a gastroenterologist regarding my already increased susceptibility of certain gastrointestinal conditions being Ashkenazi, but my testing results reaffirmed the fact that I should visit a gastroenterologist and most likely get further testing done. I was not aware that I was predisposed to type-2 diabetes which does not require mentioning to my medical provider but I should take into consideration in my lifestyle choices. Furthermore, what I discovered regarding drug and medication metabolism shocked me, I was not at all aware that I had so many SNPs associated with drug metabolism incapabilities. That is something I will most definitely inform my medical provider of. Additionally, purely for curiosity reasons I would like to have my mother genetically tested because her family history is such a mystery.
