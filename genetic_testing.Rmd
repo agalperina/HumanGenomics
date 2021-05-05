@@ -6,34 +6,34 @@ output: html_document
 ---
 # 1. Introduction to genetic testing and the underlying technology
 
-Personal genetic testing is transforming the biological and medical fields as humans now have access to their genetic instructions. However, every positive such as personalized medicine, assistance in criminal investigations and increase in research are all accompanied by a negative foil. Personalized medicine is a privilege that seems to be given to those in higher socioeconomic classes, criminal investigations are riddled with privacy and consent obstacles, while research has taken advantage of minorities or has greatly catered to those with a European ancestry. There is also high concern of privacy and having such personal data being leaked and placed in the wrong hands.
+Personal genetic testing is transforming the biological and medical fields as humans now have access to their genetic instructions. However, every positive such as personalized medicine, assistance in criminal investigations and increase in research are all accompanied by a negative foil. Personalized medicine is a privilege that seems to be given to those in higher socioeconomic classes, criminal investigations are riddled with privacy and consent obstacles, while research has taken advantage of minorities or has greatly catered to those with a European ancestry. There is also high concern of privacy and having such personal data being leaked and placed in the wrong hands as people may not be willing to trust a third party to guard something as personal as their genomic information. Overall, the field of bioethics is still in a grey area and people/ society is in the midst of deciding what is appropriate and right when it comes to genetic testing. For example, even if people do read all the legal documents before getting tested, it is not guaranteed that they have technical knowledge to understand what they are agreeing to. As the stories of All of Us Research Program’s "inclusion" of tribal communities and Henrietta Lacks have warned ,there also needs to be an important conversation had about consent and who can legally consent to what. As genetic testing becomes more normalized, it is interesting to see how it will further integrate into society and how the various obstacles and fallbacks of genetic testing will be addressed.
 
 DNA polymorphisms, most common which are SNPs, can be detected in genomes in various ways. In past decades, methods such as Southern blots, PCRs and hybridization techniques using microarray chips have been used for genome sequencing. Recently, DNA-based molecular markers have been a breakthrough technology that is used to detect SNPs as these markers can easily identify particular DNA sequences. 
 
 # 2. My genealogy and family history
 
-I was very lucky and had very documented information about my family history on my paternal side, almost no questions were left unanswered. Our documents included birth locations and dates, death locations and deaths, occupation, relocations, any achievements or major life events. My mother’s side, however, is a complete mystery beyond just immediate family. 
+I was very lucky and had highly documented information about my family history on my paternal side, almost no questions were left unanswered. Our documents included birth locations and dates, death locations and deaths, occupation, relocation, and any achievements or major life events. My mother’s side, however, is a complete mystery beyond direct immediate family. It is difficult to find familial information in databases as my family moved to America recently, so there are no records of my ancestors here. Furthermore, being Russian and Jewish, there is not much documentation that survived the last hundred years of political and social turmoil (to put it lightly) that both groups of people have faced. Just surviving was the priority so there really arent well contained legal documents that survived. The only reason my paternal family has a good ancestral record is because my great uncle was interested in our genealogy and contacted multiple distant relatives to piece together our family history. I have attached my full paternal family tree below as well.
 
 ![Geneology Tree](images/geneology_circle_chart.png)
-![Family Tree](images/HumanGenomeTree_rel_graph.pdf)
+![Family Tree](images/HumanGenomeTree_rel_graph.png)
 
 # 3. DNA matches and relatives in the databases
 
-I would expect to share around 50% of my DNA with my parents, 25% with each of my grandparents and 12.5% with each great grandparent and so on. However, it is important to distinguish the difference between genealogical ancestors and genetic ancestors as the later are the ones that I actually got some DNA from. This, of course, is regarding autosomal DNA as the sex chromosomes and maternal DNA are more directly passed down. After about eight generations back is when it is expected that the number of genetic ancestors increases linearly rather than exponentially, while the number of genealogical ancestors only begins to increase exponentially. So starting around the eight generation is where I would begin having ancestors with which I have no genetic similarity. 
+I would expect to share around 50% of my DNA with my parents, 25% with each of my grandparents and 12.5% with each great grandparent and so on. However, it is important to distinguish the difference between genealogical ancestors and genetic ancestors as the later are the ones that I actually inherited some DNA from. This, of course, is regarding autosomal DNA as the sex chromosomes and maternal DNA are more directly passed down. After about eight generations back is when it is expected that the number of genetic ancestors increases linearly rather than exponentially, while the number of genealogical ancestors only begins to increase exponentially. So starting around the eight generation is where I would begin having ancestors with which I have no genetic similarity. 
 
 ![DNA Relatives](images/DNA-relatives.png)
-I have around the expected amount of DNA shared with my aunt (25 % expected and 23.34 % observed) as well as with my first cousin once removed (6.25 % expected and 5.17 % observed). I share 2.5 % and 2.11 % with two of my second cousins and it is expected I share 3.13 %. I share 1.78 %, 1.58 % and 1.14 % with three of my third cousins and it is expected I share 0.78 %. 
+I have around the expected amount of DNA shared with my aunt (25 % expected and 23.34 % observed) as well as with my first cousin once removed (6.25 % expected and 5.17 % observed). I share 2.5 % and 2.11 % with two of my second cousins and it is expected I share 3.13 %. I share 1.78 %, 1.58 % and 1.14 % with three of my third cousins and it is expected I share 0.78 %. Most of the people in 23andMe I would assume are from my paternal side, but it is difficult to tell as neither one of my parents have done a 23andMe test. I could try and see if someone is on my materal side by comparing my relatives to those of my aunt and those that we do not share would indicate I am related to them through my mother. 
 
 # 4. Ethnicity estimates
 
-My ethnicity results were exactly what I predicted. I already knew from my paternal side that I am 50 % Ashkenazi Jewish as my paternal side of the family is 100% Ashkenazi Jewish. My maternal side of the family could potentially have had some surprises, but I got results that I expected. My 47 % Eastern European is all from my mother who believes that her family is Don Cossack, and I even expected the 2 % East Asian and Native American results as Russian history, and thus genealogy, was heavily influenced by the Mongol Empire that ruled over Russia in the 13th and 14th centuries. The German and French influence is most likely from my paternal side as throughout Jewish migration through Europe, many originally stayed in Germany. There was also 0.2 % Central Asian (Kazakhstan, Uzbekistan, Turkmenistan, etc.) trace DNA as well as 0.2 % North African and West Asian DNA. The Central Asian DNA either also came from Mongol rule over Russia, or a potential modern explanation could be that due the USSR which included the Central Asian region. I am not sure where the 0.4 % trace North African DNA comes in. I could further test my theories by looking at DNA similarities between me and some of the people 23andMe listed as possible relatives, which I did. By looking at my Aunt from my paternal side I could confirm that my Central Asian DNA mostly likely came from my Mother as my Aunt had no Central Asian DNA. She did, however, have 1 % North African and West Asian DNA which means that that those results are most likely from my Jewish Ancestors.
+My ethnicity results were exactly what I predicted. I already knew from my paternal side that I am 50 % Ashkenazi Jewish as my paternal side of the family is 100% Ashkenazi Jewish. My maternal side of the family could potentially have had some surprises, but I got results that I expected. My 47 % Eastern European is all from my mother who believes that her family is Don Cossack, and I even expected the 2 % East Asian and Native American results as Russian history, and thus genealogy, was heavily influenced by the Mongol Empire that ruled over Russia in the 13th and 14th centuries. The German and French influence is most likely from my paternal side as throughout Jewish migration through Europe, many originally stayed in Germany. Although there was some German influence in Russia during the Rule of Catherine the Great, so there is no real deterministic way to tell as the percentage is so small. Comparing to my paternal aunt, she did not have any French or German DNA but again, the percentage is so small that I cannot be certain. There was also 0.2 % Central Asian (Kazakhstan, Uzbekistan, Turkmenistan, etc.) trace DNA as well as 0.2 % North African and West Asian DNA. The Central Asian DNA either also came from Mongol rule over Russia, or a potential modern explanation could be that due the USSR which included the Central Asian region. I am not sure where the 0.4 % trace North African DNA comes in. I could further test my theories by looking at DNA similarities between me and some of the people 23andMe listed as possible relatives, which I did. By looking at my Aunt from my paternal side I could confirm that my Central Asian DNA mostly likely came from my Mother as my Aunt had no Central Asian DNA. She did, however, have 1 % North African and West Asian DNA which means that that those results are most likely from my Jewish Ancestors.
 
 ![Ethnicity Percent](images/ethnicity-percentage.png)
 ![Ethnicity Map](images/ethnicity-map.png)
 
 # 5. Older family history based on mitochondrial and Y chromosomes results
 
-The maternal and paternal haplogroups offer approximated ancestry information from ten to hundred thousand years ago. This is because both mitochondrial DNA and Y chromosome DNA have a slower mutation rate and therefore are generally conserved. Therefore, any mutations are significant and can be traced back to hundreds of generations.
+The maternal and paternal haplogroups offer approximated ancestry information from ten to hundred thousand years ago. This is because both mitochondrial DNA and Y chromosome DNA have a slower mutation rate and therefore are generally conserved. Therefore, any mutations are significant and can be traced back hundreds of generations.
 Through family members that have also taken a 23andMe test I was able to gather more information about my mitochondrial and Y chromosome results.
  
 Mother:
@@ -44,9 +44,9 @@ Father:
 Mitochondrial: W3
 Y chromosome: E-L29
  
-My mitochondrial haplogroup is H1u, while if I had a Y chromosome, my haplogroup would be E-L29. After further research, I discovered that it is proposed that the H1u lineage split off from other H groups around modern-day Azerbaijan, general Caucus area. This lines up with my Mother’s Don Cossacks ancestry as Don Cossacks are believed to have originated in the North Caucuses. The most common maternal haplogroup for Ashkenazi Jews is K, so it is interesting that my paternal maternal haplogroup is W which is most common in Pakistan and Northern Indian. I found some research that believes that W3 originated in the Middle East but spread to Europe around 15,000 years ago and spans across regions of Russia, to North Africa, Caucasus, the Near East, Mongolia and the Indian Subcontinent. E-L29 also originated in the Middle East about 4,000 years ago and is extremely common in Ashkenazi Jews.
+My mitochondrial haplogroup is H1u, while if I had a Y chromosome, my haplogroup would be E-L29. After further research, I discovered that it is proposed that the H1u lineage split off from other H groups around modern-day Azerbaijan, general Caucus area. This lines up with my Mother’s Don Cossack ancestry as Don Cossacks are believed to have originated in the North Caucuses. The most common maternal haplogroup for Ashkenazi Jews is K, so it is interesting that my paternal maternal haplogroup is W which is most common in Pakistan and Northern Indian. I found some research that believes that W3 originated in the Middle East but spread to Europe around 15,000 years ago and spans across regions of Russia, to North Africa, Caucasus, the Near East, Mongolia and the Indian Subcontinent. Additionally, the W haplogroup was the haplogroup of the corded ware culture people, a group of people that inhabited Northern Europe around 250,000 BCE. E-L29 also originated in the Middle East about 4,000 years ago and is extremely common in Ashkenazi Jews.
 
-# 6. Medically important genotypes and 7. Interesting genotypes
+# 6. Medically important genotypes
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -99,13 +99,20 @@ mySNPs_gwas_table$my_allele_2 <- str_sub(mySNPs_gwas_table$genotype, 2, 2)
 mySNPs_gwas_table$have_risk_allele_count <- if_else(mySNPs_gwas_table$my_allele_1 == mySNPs_gwas_table$risk_allele_clean, 1, 0) + if_else(mySNPs_gwas_table$my_allele_2 == mySNPs_gwas_table$risk_allele_clean, 1, 0)
 ```
 
-There are three medical concerns that I wanted to investigate with my SNPs. Asthma, type-2 diabetes and Crohns/ associated IBD or IBS SNPS
+There are three medical concerns that I wanted to investigate the most with my SNPs. Asthma, type-2 diabetes and Crohns/ associated IBD or IBS SNPs.
 
-I have a family history of type-2 diabetes. I wanted to look more into it to see what SNPs I have asscoaited with diabetes risk.
+I have a family history of type-2 diabetes. I wanted to look more into it to see what SNPs I have associated with diabetes risk.
 
 ```{r}
 filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
- select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype, freq = RISK.ALLELE.FREQUENCY) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "diabetes")) %>%
+ distinct()
+```
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype, freq = RISK.ALLELE.FREQUENCY) %>% 
+ filter(freq >= 0.5) %>%
  filter(str_detect(tolower(DISEASE.TRAIT), "diabetes")) %>%
  distinct()
 ```
@@ -138,10 +145,11 @@ filter(mySNPs, rsid == "rs12255372")
 ```
 no increased risk of T2D
 
+I do have plenty of risk alleles associated with T2D and a large majority of them have a risk allele frequency greater than 0.5, I believe if I maintain a healthy lifestyle I can, hopefully, avoid developing T2D. I also have a few alleles associated with lower risk of T2D which supports my healthy lifestyle hypothesis. The majority of my risk alleles were not found on SNPedia or did not have a published magnitude.
 
 ```{r}
 filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
- select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype, freq = RISK.ALLELE.FREQUENCY) %>% 
  filter(str_detect(tolower(DISEASE.TRAIT), "celiac")) %>%
  distinct()
 ```
@@ -149,7 +157,14 @@ one of two SNPs associated with increase Crohn's
 
 ```{r}
 filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
- select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype, freq = RISK.ALLELE.FREQUENCY) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "colorectal")) %>%
+ distinct()
+```
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype, freq = RISK.ALLELE.FREQUENCY) %>% 
+ filter(freq >= 0.5) %>%
  filter(str_detect(tolower(DISEASE.TRAIT), "colorectal")) %>%
  distinct()
 ```
@@ -163,18 +178,20 @@ filter(mySNPs, rsid == "rs4779584")
 ```{r}
 filter(mySNPs, rsid == "rs58920878")
 ```
-no increase of cholorectal cancer
+no increase of colorectal cancer
 
 ```{r}
 filter(mySNPs, rsid == "rs4939827")
 ```
 0.73x decreased risk for colorectal cancer
 
+While I do not believe I have a family history of celiac or crohns, it is very common in Jewish populations. While I do have some risk alleles associated with increase risk of celiac and crohns, and the allele frequencies are fairly high, I also have alleles associated with decrease risk celiac or crohns. Furthermore, SNP rs7574865 has a magnitude of 2.5 which SNPedia categorizes as something to keep in mind but not worry about and SNP rs3184504 had a magnitude of 1.4 which SNPedia had labeled as not too exciting. rs10411210 has a magnitude of 2.1 and 1.15x increased risk of colorectal cancer which was determined by a study with a sample size of around 66,000. However, I found that a majority of my risk SNPs had no published magnitude associated with them. For the majority of my risk of colorectal cancer, I do have plenty of risk alleles with a risk frequency of greater than 0.5. However, none had a magnitude large enough to cause concern.
+
 I have been "diagnosed" with asthma, but I have never experienced an asthma attack or have experienced troubled breathing. Therefore, I wanted to see if I have any SNPs associated with asthma.
 
 ```{r}
 filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
- select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype, freq = RISK.ALLELE.FREQUENCY) %>% 
  filter(str_detect(tolower(DISEASE.TRAIT), "asthma")) %>%
  distinct()
 ```
@@ -190,34 +207,31 @@ No asthma and atopic dermatitis SNP
 ```{r}
 filter(mySNPs, rsid == "rs4794067")
 ```
-2.1x risk for Aspirin Induced Asthma. But possibly lower risk of lupus and intractable Graves' disease.
+2.1x risk for Aspirin Induced Asthma. But possibly lower risk of lupus and intractable Graves' disease with a magnitude of 2, which is something to keep in mind but not necessarily worry about. I was not aware that Aspirin Induced Asthma was a condition so it is good to know that I have some increase risk of AIA. 
+
 
 The following SNPs are all associated with increased asthma risk if exposed to smoke
 
 ```{r}
 filter(mySNPs, rsid == "rs2305480")
 ```
-~3x increased asthma risk if exposed to smoke
+~3x increased asthma risk if exposed to smoke with a magnitude of 2, which is something to keep in mind but not necessarily worry about.
 ```{r}
 filter(mySNPs, rsid == "rs4795400")
 ```
 no SNP present
 
-```{r}
-filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
- select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
- filter(str_detect(tolower(DISEASE.TRAIT), "memory")) %>%
- distinct()
-```
+Overall a lot of my asthma alleles were not found on SNPedia or had no published magnitude; however, rs4129267 has a magnitude of 1.4 which is fairly low and does not personally cause me concern (even though I do have 2 copies of these). I also have SNPs such as rs1837253 that has associated with a 0.84x decreased risk of asthma with a magnitude of 2.2 (and I have multiple copies of this SNP) . 
+
 
 ```{r}
 filter(mySNPs, rsid == "rs4680")
 ```
-Warrior: Val, less exploratory, higher COMT enzymatic activity, therefore lower dopamine levels; higher pain threshold, better stress resiliency, albeit with a modest reduction in executive cognition performance under most conditions
+Warrior: Val, less exploratory, higher COMT enzymatic activity, therefore lower dopamine levels; higher pain threshold, better stress resiliency, albeit with a modest reduction in executive cognition performance under most conditions. Magnitude 2.5. Shocked I dont have the "worrier" variant.
 
 ```{r}
 filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
- select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype, freq = RISK.ALLELE.FREQUENCY) %>% 
  filter(str_detect(tolower(DISEASE.TRAIT), "nicotine")) %>%
  distinct()
 ```
@@ -230,22 +244,75 @@ filter(mySNPs, rsid == "rs1051730 ")
 ```
 No nicotine dependence alleles
 
+I was surprised to discover I had multiple risk alleles for nicotine dependence. This does not really apply to me because I have never smoked because of my asthma diagnosis.The SNP rs16969968, which I have with a magnitude of 2.5, is interestingly also associated with lower cocaine dependence as well as higher nicotine dependence. I did not realize that having a dependence to one "drug" may have an opposite response to ones dependence to another drug.
+
+Drug Metabolism
 ```{r}
 filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
- select(DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype) %>% 
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype, freq = RISK.ALLELE.FREQUENCY) %>% 
  filter(str_detect(tolower(DISEASE.TRAIT), "drug")) %>%
  distinct()
 ```
 
+```{r}
+filter(mySNPs, rsid == "rs4986893")
+```
+```{r}
+filter(mySNPs, rsid == "rs28399504")
+```
+```{r}
+filter(mySNPs, rsid == "rs41291556")
+```
+normal metabolizer of several commonly prescribed drugs
+
+```{r}
+filter(mySNPs, rsid == "rs12248560")
+```
+ultra fast metabolizer of proton pump inhibitors and benefit from tamoxifen treatment; drug metabolism effects; also 0.77x decreased breast cancer risk. Magnitude 2.
+```{r}
+filter(mySNPs, rsid == "rs8099917")
+```
+Moderately lower odds of responding to PEG-IFNalpha/RBV treatment (Hepatitis C treatments). Magnitude 2.
+```{r}
+filter(mySNPs, rsid == "rs1057910")
+```
+average 40% reduction in warfarin metabolism (1/2 SNPs). Magnitude 2.5.
+```{r}
+filter(mySNPs, rsid == "rs1800460")
+```
+impaired capability of detoxifying byproducts of certain drugs (antineoplastic and immunosuppressant). Magnitude 3.
+```{r}
+filter(mySNPs, rsid == "rs1800462")
+```
+incapable of detoxifying certain drugs (antineoplastic and immunosuppressant). Magnitude 3.5.
+
+```{r}
+filter(mySNPs, rsid == "rs1142345")
+```
+impaired drug metabolism (antineoplastic and immunosuppressant). Magnitude 3.
+
+The three SNP associated with antineoplastic and immunosuppressant, all of mine which are broken, and also have the highest magnitude of any SNPs I have yet to test. A magnitude of 3.5 is labeled by SNPedia as something worth my time, meaning I should bring it up to my doctor. 
+
+```{r}
+filter(mySNPs, rsid == "rs11212617")
+```
+Somewhat increased likelihood of treatment success with metformin (helps with diabetes which I have increase chance of). Magnitude 1.5.
+```{r}
+filter(mySNPs, rsid == "rs2395029")
+```
+no increase risk for drug-induced liver injury when prescribed flucloxacillin
+
+Overall, I was shocked to find out that I have three SNPs associated with poor antineoplastic and immunosuppressant metabolism and one is weak and the other is broke. This is not something I have ever thought about but now am glad to know to be aware for the future.
+
+
 Ashkenazi related alleles
+
+Ashkenazi Jews are linked with a higher frequency of hereditary genetic disorders, so I was curious (and a bit nervous) to see if I am a carrier for any hereditary diseases linked to Ashkenazi Jews.
+
 ```{r}
 filter(mySNPs, rsid == "rs11209026")
 ```
-higher risk for certain autoimmune diseases.
-```{r}
-filter(mySNPs, rsid == "rs11209026")
-```
-higher risk for certain autoimmune diseases.
+higher risk for certain autoimmune diseases. Magnitude 1.1.
 ```{r}
 filter(mySNPs, rsid == "rs386833395")
 ```
@@ -268,7 +335,7 @@ filter(mySNPs, rsid == "rs373297713")
 ```{r}
 filter(mySNPs, rsid == "rs121965063")
 ```
-not a carrier of hemophilia C (1/23 Ashkenazi are carriers
+not a carrier of hemophilia C (1/23 Ashkenazi are carriers)
 
 ```{r}
 filter(mySNPs, rsid == "rs111033171")
@@ -289,7 +356,7 @@ No resistance to HIV
 ```{r}
 filter(mySNPs, rsid == "rs662799")
 ```
-1.4x higher early heart attack risk; less weight gain on high fat diets
+1.4x higher early heart attack risk; less weight gain on high fat diets. Magnitude 2.0.
 ```{r}
 filter(mySNPs, rsid == "rs7495174")
 ```
@@ -317,11 +384,11 @@ show less disgust
 ```{r}
 filter(mySNPs, rsid == "rs1015362")
 ```
-2-4x higher risk of sun sensitivity if part of risk haplotype.
+2-4x higher risk of sun sensitivity if part of risk haplotype. Magnitude 2.
 ```{r}
 filter(mySNPs, rsid == "rs4911414")
 ```
-2-4x higher risk of sun sensitivity if part of risk haplotype
+2-4x higher risk of sun sensitivity if part of risk haplotype. MAgnitude 2.
 ```{r}
 filter(mySNPs, rsid == "rs12821256")
 ```
@@ -341,57 +408,12 @@ Lighter hair color & blue eyes more likely
 ```{r}
 filter(mySNPs, rsid == "rs1042522")
 ```
-Live 3 years longer. Chemotherapy is more effective.
+Live 3 years longer. Chemotherapy is more effective. Magnitude 3, pretty exciting.
 ```{r}
 filter(mySNPs, rsid == "rs6968865")
 ```
 Associated with (slightly) increased coffee consumption
 
-
-Drug Metabolism
-```{r}
-filter(mySNPs, rsid == "rs4986893")
-```
-```{r}
-filter(mySNPs, rsid == "rs28399504")
-```
-```{r}
-filter(mySNPs, rsid == "rs41291556")
-```
-normal metabolizer of several commonly prescribed drugs
-
-```{r}
-filter(mySNPs, rsid == "rs12248560")
-```
-ultra fast metabolizer of proton pump inhibitors and benefit from tamoxifen treatment; drug metabolism effects; also 0.77x decreased breast cancer risk
-```{r}
-filter(mySNPs, rsid == "rs8099917")
-```
-Moderately lower odds of responding to PEG-IFNalpha/RBV treatment (Hepatitis C treatments)
-```{r}
-filter(mySNPs, rsid == "rs1057910")
-```
-average 40% reduction in warfarin metabolism (1/2 SNPs)
-```{r}
-filter(mySNPs, rsid == "rs1800460")
-```
-impaired capability of detoxifying byproducts of certain drugs (antineoplastic and immunosuppressant)
-```{r}
-filter(mySNPs, rsid == "rs1800462")
-```
-incapable of detoxifying certain drugs (antineoplastic and immunosuppressant)
-```{r}
-filter(mySNPs, rsid == "rs1142345")
-```
-impaired drug metabolism (antineoplastic and immunosuppressant)
-```{r}
-filter(mySNPs, rsid == "rs11212617")
-```
-Somewhat increased likelihood of treatment success with metformin (helps with diabetes which I have increase chance of)
-```{r}
-filter(mySNPs, rsid == "rs2395029")
-```
-no increase risk for drug-induced liver injury when prescribed flucloxacillin
 
 
 
@@ -413,6 +435,26 @@ datatable(
  arrange(RISK.ALLELE.FREQUENCY) %>%
  select(rsid, your_genotype = genotype, DISEASE.TRAIT, INITIAL.SAMPLE.SIZE,RISK.ALLELE.FREQUENCY)
  )
+```
+
+Overall summary of all the potential risk alleles I have
+
+```{r}
+datatable(
+ filter(mySNPs_gwas_table,have_risk_allele_count > 0 & (str_detect(tolower(INITIAL.SAMPLE.SIZE), "european") | str_detect(tolower(REPLICATION.SAMPLE.SIZE), "european")) & (RISK.ALLELE.FREQUENCY > 0.9 & !is.na(RISK.ALLELE.FREQUENCY))) %>%
+ arrange(RISK.ALLELE.FREQUENCY) %>%
+ select(rsid, your_genotype = genotype, DISEASE.TRAIT, INITIAL.SAMPLE.SIZE,RISK.ALLELE.FREQUENCY)
+ )
+```
+The increase risk of Intraocular pressure	is very interesting because I am extremely susceptible to migraines and headaches in general.
+
+I also know that my family has higher levels of bad cholesterol and lower levels of good cholesterol, so it is not surprising to see I have a risk allele for higher HDL. Again, unsurprisingly, I have plenty of risk alleles with a frequency greater than 0.9 associated with poor cholesterol. Under further investigation, I have quite a lot of risk alleles associated with cholesterol.
+
+```{r}
+filter(mySNPs_gwas_table, have_risk_allele_count >= 1) %>%
+ select(rsid, DISEASE.TRAIT, risk_allele = risk_allele_clean, your_geneotype = genotype, freq = RISK.ALLELE.FREQUENCY) %>% 
+ filter(str_detect(tolower(DISEASE.TRAIT), "cholesterol")) %>%
+ distinct()
 ```
 
 ```{r}
@@ -459,7 +501,7 @@ ggplot(filter(trait_snp_proportion, count_of_studies > 1 & proportion_of_snps_fo
 datatable(trait_snp_proportion)
 ```
 
-```{r}
+```{r, eval = FALSE}
 datatable(
  filter(mySNPs_gwas_table,have_risk_allele_count > 0 & (str_detect(tolower(INITIAL.SAMPLE.SIZE), "european") | str_detect(tolower(REPLICATION.SAMPLE.SIZE), "european")) & (RISK.ALLELE.FREQUENCY > 0. & !is.na(RISK.ALLELE.FREQUENCY))) %>%
  arrange(RISK.ALLELE.FREQUENCY) %>%
@@ -473,7 +515,19 @@ datatable(
  select(rsid, your_genotype = genotype, strongest_risk_allele = risk_allele_clean, DISEASE.TRAIT, STUDY )
 )
 ```
+SNP where I have both risk alleles
+
+For something monogenic like eye color, it is super easy to look at your SNPs and see that you have blue eyes (in my case). However, ones genome is extremely complicated and most genes are polygenic such as skin color, height and weight. Beyond just genetic inheritance, one is influenced epigenetically which we would not be able to see just by looking at ones genetic code, as well as environmentally. 
+
+# 7. Interesting genotypes
+
+There were many interesting phenotypes that 23andMe predicted I would have. There was only a 6% chance of me having curly hair and yet I have very curly hair. Also, it predicted that I would have blue eyes with a chance of 51% which is fairly high. The interesting part is that I am the only person in my family with blue eyes, everyone else has green or hazel eyes which just shows how interconnected and complex genetics is. 23andMe also stated that I have a variant associated with having a worse sense of direction even though I have an amazing sense of direction, better than anyone I know. 23andMe also mentioned that I, in theory, should drink slightly more coffee than an average person when in fact I do not drink any coffee at all. I actually found the SNP associate with coffee consumption on SNPedia which backed up the claim that I should drink more coffee than an average person.
+
+![Curly Hair](images/curly.png)
+![Blue Eyes](images/blue.png)
+![Coffee Consumption](images/coffee.png)
+![Sense of Direction](images/direction.png)
 
 # 8. Recommendations for next steps
 
-I should probably see a gastroenterologist regarding my already increased susceptibility of certain gastrointestinal conditions being Ashkenazi, but my testing results reaffirmed the fact that I should visit a gastroenterologist and most likely get further testing done. I was not aware that I was predisposed to type-2 diabetes which does not require mentioning to my medical provider but I should take into consideration in my lifestyle choices. Furthermore, what I discovered regarding drug and medication metabolism shocked me, I was not at all aware that I had so many SNPs associated with drug metabolism incapabilities. That is something I will most definitely inform my medical provider of. Additionally, purely for curiosity reasons I would like to have my mother genetically tested because her family history is such a mystery.
+I should probably see a gastroenterologist regarding my already increased susceptibility of certain gastrointestinal conditions being Ashkenazi, but my testing results reaffirmed the fact that I should visit a gastroenterologist and most likely get further testing done, especially considering I have un-diagnosed gastrointenstinal issues as it is. I was not aware that I was predisposed to type-2 diabetes which most likely does not require mentioning to my medical provider but I should take into consideration in my lifestyle choices. Furthermore, what I discovered regarding drug and medication metabolism shocked me, I was not at all aware that I had so many SNPs associated with drug metabolism incapabilities. That is something I will most definitely inform my medical provider of. Additionally, purely for curiosity reasons I would like to have my mother genetically tested because her family history is such a mystery.
